@@ -81,6 +81,7 @@
 .body-section{
     box-shadow: inset 0px 6px 9px 0px #ececec;
     background: #f3f3f3cc;
+	height: 90vh;
 }
 .side-nave-ul li{
     list-style: none;
@@ -424,8 +425,16 @@ color: #a9a8a8;
     color: #717171;
     font-size: 13px;
 }
+.setting-nav li{
+	margin-left: 25px;
+}
 
-
+.setting-nav{
+	display:none;
+}
+.side-nave-ul li i {
+    margin-right: 12px;
+}
 @endsection
 
 @section('content')
@@ -484,17 +493,21 @@ color: #a9a8a8;
 			<menu class="">
 				<div class="">
 					<ul class="side-nave-ul" >
-						<li onclick="massgeFunction()" class="btn1 active"><i class="fas fa-home "></i>Massage</li>
+						<li onclick="massgeFunction()" class="btn1 active"><i class="ti-comment-alt"></i>Massage</li>
 					<!---	
 						<li onclick="FriendsFunction()" class="btn2"><i class="far fa-newspaper"></i>Friends</li>	--->
 						
-						<li onclick="profileFunction()" class="btn3 "><i class="far fa-envelope"></i>Profile</li>
+						<li onclick="profileFunction()" class="btn3 "><i class="ti-user"></i>Profile</li>
+												
+						<li class="" id="setting"><i class="ti-settings"></i>Setting
+						<i style="float:right;"class="ti-angle-down"></i>
+						</li>
+						<ul class="setting-nav">
+							<li><a href="/logout">LogIn Other Account</a></li>
+							<li><a href="/forget">Forget Password</a></li>
+						</ul>
 						
-						<li onclick="profileFunction()" class="btn4"><i class="far fa-user"></i>Notification</li>
-						
-						<li onclick="profileFunction()" class="btn5 "><i class="far fa-user"></i>Setting</li>
-						
-						<li class="btn6 "><i class="fas fa-ellipsis-h"></i><a style="display: block;" href="/logout">Log Out</a></li>
+						<li class="btn6 "><a style="display: block;" href="/logout"><i  class="ti-shift-right"></i>  Log Out</a></li>
 					</ul>
 				
 				</div>
@@ -723,7 +736,7 @@ color: #a9a8a8;
 			  <div class="people">
 				<div class="friend">
 					<div class="people-title">
-						<span>Friends</span>
+						<span>Contacts</span>
 					</div>
 					@foreach(App\friend::where('from_friend',$user->username)->orWhere('to_friend',$user->username)->get() as $friends)	
 					
@@ -845,14 +858,36 @@ color: #a9a8a8;
 			type:'get',
 			url:'/chat-massage?username={{$user->username}}&to_username='+userInfo,
 			success:function(data){
-				console.log(data);
+				//console.log(data);
 				$('.massage-body').empty()
 				$.each(data,function(index, chat){
+					
+					
 					if(chat.from_user=='{{$user->username}}'){
-						$('.massage-body').append('<div class="from-msg"><p>'+chat.massage+'</p></div>');
+						
+						if(chat.massage==null){
+						}else{
+							$('.massage-body').append('<div class="from-msg"><p>'+chat.massage+'</p></div>');
+						}
+						
+						if(chat.image==null){
+						}else{
+							$('.massage-body').append('<div class="from-msg"><img src="/image/user/'+chat.image+'" alt="" /></div>');
+						}
 						
 					}else{
-						$('.massage-body').append('<div class="to-msg"><p>'+chat.massage+'</p></div>');
+						
+						if(chat.massage==null){
+						}else{
+							$('.massage-body').append('<div class="to-msg"><p>'+chat.massage+'</p></div>');
+						}
+						
+						if(chat.image==null){
+						}else{
+							$('.massage-body').append('<div class="to-msg"><img src="/image/user/'+chat.image+'" alt="" /></div>');
+						}
+						
+						
 					}
 				
 				
@@ -861,7 +896,7 @@ color: #a9a8a8;
 
 			},
 			error:function(data){
-				console.log(data);
+				//console.log(data);
 			},
 		});	
 		};	
@@ -947,7 +982,7 @@ function intvalChatPerson(){
 				
 			},
 			error:function(data){
-				console.log(data);
+				//console.log(data);
 			},
 		});	
 
@@ -1017,7 +1052,7 @@ function intvalChatPerson(){
 			type:'get',
 			url:'/chat-massage?username={{$user->username}}&to_username='+userInfo,
 			success:function(data){
-				console.log(data);
+				//console.log(data);
 				$('.massage-body').empty()
 				$.each(data,function(index, chat){
 					if(chat.from_user=='{{$user->username}}'){
@@ -1033,7 +1068,7 @@ function intvalChatPerson(){
 
 			},
 			error:function(data){
-				console.log(data);
+				//console.log(data);
 			},
 		});	
 		};	
@@ -1080,7 +1115,7 @@ function intvalChatPerson(){
 		ChangeUrl('/'+profileLink,'/'+profileLink);
 
 		$.get('/subUserProfile?username={{$user->username}}&to_username='+profileLink,function(data){
-			console.log(data);
+			//console.log(data);
 			
 			if(data.contact ==1){
 				$('.add-contact').html('<span class="ti-check"> </span> <p>Added</p>');
@@ -1202,6 +1237,14 @@ function intvalChatPerson(){
 	};
 
 
+	
+	
+	// 		SETTING TOGGLE
+	
+	$('#setting').click(function(){
+		$('.setting-nav').slideToggle(300);
+	});
+	
 
 $(document).ready(function(){
 	
@@ -1275,12 +1318,12 @@ $(document).ready(function(){
 					scrollTop:$('.massage-footer').offset().top
 				},1000);
 				 */
-				console.log(data);
+			//	console.log(data);
 					
 				
 			},
 			error:function(data){
-				console.log(data);
+				//console.log(data);
 			},
 		});
 	});
@@ -1339,10 +1382,10 @@ $(document).ready(function(){
 					$('.search-user-result').append('<div class="massages-people"><div class="msg-people">'+image+'<div class="msg-info"><input type="hidden" value="'+stdObj.username+'" class="userInfo" /><span class="msg-people-name">'+stdObj.firstName+'  '+stdObj.lastName+' </span></div></div><div class="msg-count active-status"></div></div>');
 					
 				});
-				console.log(data);
+				//console.log(data);
 			},
 			error:function(data){
-				console.log(data);
+				//console.log(data);
 			},
 		});	
 
