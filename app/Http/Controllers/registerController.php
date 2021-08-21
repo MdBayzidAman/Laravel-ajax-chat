@@ -86,7 +86,7 @@ class registerController extends Controller
 		 
 		 
 	 
-	  return redirect('/user-verify?username='.$username)->with('success','Please check your email inbox !. We send a verify code to your email.');
+	  return view('register.verify',compact('username'))->with('success','Please check your email inbox !. We send a verify code to your email.');
 	  	  
     }
 	
@@ -94,11 +94,6 @@ class registerController extends Controller
 	
 
 //-------------------- verify mail-------------------//
-//		VIEW VERIFY PAGE
-    public function verifyPage()
-    {
-        return view('register.verify');
-    }
 	
 //		VERIFY EMAIL
     public function verify(Request $request)
@@ -121,7 +116,10 @@ class registerController extends Controller
 
 		$firstName=user::where('username',$request->username)->first()->firstName;
 		
-		return redirect('/')->with('success','Hi '.$firstName.' !  You are successfully created your account.');
+		
+
+			return redirect('/')->with('success','Hi '.$firstName.' !  You are successfully created your account.');
+		
 
 	 }else{		 
 		 $username=$request->username;

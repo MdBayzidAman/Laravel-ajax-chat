@@ -125,35 +125,28 @@
 <section class="main-section">
 	<div class="logo-section">
 		<a href="#">
-			<img src="{{asset('image/self/logo.jpg')}}" alt="" />
+			<img src="{{asset('image/self/logo.png')}}" alt="" />
 			<span><b>ChatApplication</b></span>
 		</a>
 	</div>
 	<div class="form-contentent verify-section">
 	
-		<form action="/verify" method="post" >
+		<form action="/forget-password" method="post" >
 			{{csrf_field()}}
 			<br />
-			<span style="font-family: system-ui;color: #292929;" ><b>Enter Verify Code</b></span>
+			<span style="font-family: system-ui;color: #292929;" ><b>Enter new password</b></span>
 			
-			<input type="hidden" name="username" value="<?php echo $_REQUEST['username'] ?>" class="form-input" required />
+			<input type="hidden" name="username" value="{{$username}}" class="form-input" required />
 			
-			<input type="number" name="verify" placeholder="Verify Code" class="form-input" id="password" required />
-
-			<input type="submit" value="Verify Account" class="submit " />
+			<input type="password" name="password" placeholder="Enter New Password" class="form-input" id="password" required />
+			<br />
+			<br />
+			<span style="font-family: system-ui;color: #292929;" ><b>Confirm your password</b></span>
+			
+			<input type="password" name="confirmPassword" placeholder="Confirm Password" class="form-input" id="password" required />
+			
+			<input type="submit" value="Change password" class="submit" />
 		</form>
-		<div class="footer-section">
-		<form action="/resend" method="post" >
-			{{csrf_field()}}
-			
-			<input type="hidden" name="username" value="<?php echo $_REQUEST['username'] ?>" class="form-input" required />
-			
-			<input type="submit" value="Resend code ?" class="resend" />
-		</form>
-
-			
-			
-		</div>
 
 	</div>
 </section>

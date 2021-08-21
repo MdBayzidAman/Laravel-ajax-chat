@@ -74,7 +74,7 @@
 <section class="main-section">
 	<div class="logo-section">
 		<a href="#">
-			<img src="{{asset('image/self/logo.jpg')}}" alt="" />
+			<img src="{{asset('image/self/logo.png')}}" alt="" />
 			<span><b>ChatApplication</b></span>
 		</a>
 	</div>

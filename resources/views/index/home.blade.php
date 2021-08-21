@@ -5,7 +5,7 @@
 @endsection()
 
 @section('style')
-*{    font-family: sans-serif;}
+*{font-family: sans-serif;}
 .top-nav{
 	font-size:23px;
 	padding: 15px 0;
@@ -81,7 +81,7 @@
 .body-section{
     box-shadow: inset 0px 6px 9px 0px #ececec;
     background: #f3f3f3cc;
-	height: 90vh;
+	height: 100%;
 }
 .side-nave-ul li{
     list-style: none;
@@ -426,7 +426,7 @@ color: #a9a8a8;
     font-size: 13px;
 }
 .setting-nav li{
-	margin-left: 25px;
+	margin-left: 15px;
 }
 
 .setting-nav{
@@ -447,7 +447,7 @@ color: #a9a8a8;
 			<div class="col-s-3">
 				<div class="top-nav-left">
 					<a href="#">
-						<img src="{{asset('image/self/logo.jpg')}}" alt="" />
+						<img src="{{asset('image/self/logo.png')}}" alt="" />
 						<span><b>ChatApplication</b></span>
 					</a>
 				</div> 
@@ -503,7 +503,7 @@ color: #a9a8a8;
 						<i style="float:right;"class="ti-angle-down"></i>
 						</li>
 						<ul class="setting-nav">
-							<li><a href="/logout">LogIn Other Account</a></li>
+							<li><a href="/logout">LogIn Another Account</a></li>
 							<li><a href="/forget">Forget Password</a></li>
 						</ul>
 						

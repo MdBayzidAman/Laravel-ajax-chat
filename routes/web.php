@@ -49,7 +49,7 @@ route::post('/login','registerController@login');
 //				sign-up
 route::post('/sign-up','registerController@signUp');
 //				sign-up verify
-route::get('/user-verify','registerController@verifyPage');
+//route::get('/user-verify','registerController@verifyPage');
 route::post('/verify','registerController@verify');
 //				sign-up verify resend
 route::post('/resend','registerController@resend');
@@ -58,7 +58,11 @@ route::post('/resend','registerController@resend');
 route::get('/forget','forgetControll@index');
 route::post('/forget','forgetControll@forget');
 route::post('/forget-email','forgetControll@selectEmail');
-route::get('/forget-verify','forgetControll@verifyPage');
+//route::get('/forget-verify','forgetControll@verifyPage');
+route::post('/forget-verify','forgetControll@verify');
+route::post('/forget-password','forgetControll@pwdChange');
+
+
 
 //		---  logout  ---
 route::get('/logout','registerController@logout');

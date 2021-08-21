@@ -125,18 +125,19 @@
 <section class="main-section">
 	<div class="logo-section">
 		<a href="#">
-			<img src="{{asset('image/self/logo.jpg')}}" alt="" />
+			<img src="{{asset('image/self/logo.png')}}" alt="" />
 			<span><b>ChatApplication</b></span>
 		</a>
 	</div>
 	<div class="form-contentent verify-section">
 	
-		<form action="/verify" method="post" >
+		<form action="/forget-verify" method="post" >
 			{{csrf_field()}}
 			<br />
 			<span style="font-family: system-ui;color: #292929;" ><b>Enter Verify Code</b></span>
 			
 			<input type="hidden" name="username" value="<?php echo $_REQUEST['username'] ?>" class="form-input" required />
+			
 			
 			<input type="number" name="verify" placeholder="Verify Code" class="form-input" id="password" required />
 

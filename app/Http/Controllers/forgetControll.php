@@ -20,12 +20,18 @@ class forgetControll extends Controller
     }
 
  //		VIEW VERIFY PAGE
-    public function verifyPage()
+/*     public function verifyPage()
     {
         return view('register.forget.forgetVerify');
     }
+ */
 
 
+	
+	
+	
+	
+	
 	
 	//		CHOESE EMAIL FOR FORGET PASSWORD
     public function forget(Request $request)
@@ -64,7 +70,9 @@ class forgetControll extends Controller
 			$user->save();
 			
 			
-			return redirect('/forget-verify?username='.$user->username)->with('success','Please check your email inbox !. We send a verify code to your email.');
+			$username=$user->username;
+			
+			return view('register.forget.forgetVerify',compact('username'))->with('success','Please check your email inbox !. We send a verify code to your email.');
 			
 		}elseif($countEmail>1){
 			
@@ -87,6 +95,7 @@ class forgetControll extends Controller
 		'username' => 'required',
 		]);	
 		
+		$username=$request->username;
 		$code=rand(111111,999999);
 		
 /* 		Mail::send('register.mail',[
@@ -107,7 +116,7 @@ class forgetControll extends Controller
 		$user->verify=$code;
 		$user->save();
 		
-        return redirect('/forget-verify?username='.$request->username)->with('success','Please check your email inbox !. We send a verify code to your email.');
+        return view('register.forget.forgetVerify',compact('username'))->with('success','Please check your email inbox !. We send a verify code to your email.');
     }
 
 
@@ -134,7 +143,7 @@ class forgetControll extends Controller
 		 $request->session()->put('LoggetUser',$user->username);
 
 		
-		return view('register.forget.forgetPassword',compact('username'));
+		return view('register.forget.forgetPassword',compact('username'))->with('success','Your mail has been verifyed. Now you can change your password');
 
 	 }else{		 
 		 
@@ -148,19 +157,34 @@ class forgetControll extends Controller
 
 
 
-    public function update(Request $request, $id)
+    public function pwdChange(Request $request)
     {
-        //
+		$request->validate([
+			'password'=>['required','min:4','max:10'],
+			'confirmPassword'=>'required_with:password|same:password|min:4|max:10',
+		]);
+		
+		 $user=new user;
+		 $user=user::where('username',$request->username)->first();
+		 $user->password=$request->password;
+		 $user->save();
+		
+		$request->session()->put('LoggetUser',$request->username);
+		
+        return redirect('/')->with('success','Hi '.$user->firstName .' !  You are successfully forgeted your password.');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+  
+  
 }
