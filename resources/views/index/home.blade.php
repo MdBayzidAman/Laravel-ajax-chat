@@ -82,6 +82,7 @@
     box-shadow: inset 0px 6px 9px 0px #ececec;
     background: #f3f3f3cc;
 	height: 100%;
+	padding-bottom: 55px;
 }
 .side-nave-ul li{
     list-style: none;
@@ -283,7 +284,8 @@ color: #a9a8a8;
 }
 
 .massage-main-div{
-	display:none; 
+	display:none;
+    box-shadow: 2px 3px 7px 0px #e4e4e4;
 }
 
 
@@ -291,7 +293,7 @@ color: #a9a8a8;
 	display: flex;
     flex-direction: column;
     height: 500px;
-    justify-content: space-between;
+    justify-content: flex-start;
 }
 .msg-img{
 	margin-left:10px;
@@ -435,6 +437,33 @@ color: #a9a8a8;
 .side-nave-ul li i {
     margin-right: 12px;
 }
+
+.m-user{
+	display:none;
+	cursor:pointer;
+	float:right;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+@media only screen and (max-width: 576px)
+{
+	footer{
+		display:block;
+	}
+}
+
+
+
 @endsection
 
 @section('content')
@@ -446,11 +475,20 @@ color: #a9a8a8;
 		<div class="col">
 			<div class="col-s-3">
 				<div class="top-nav-left">
-					<a href="#">
+					<a href="/">
 						<img src="{{asset('image/self/logo.png')}}" alt="" />
 						<span><b>ChatApplication</b></span>
 					</a>
-				</div> 
+					<div onclick="profileFunction()" class="m-user md-block">
+						<a >
+						@if($user->image)
+							<img class="user-img" src="{{asset('image/profile/'.$user->image)}}" />
+						@else
+							<img class="user-img" src="{{asset('image/self/user.jpg')}}" />
+						@endif
+						</a>
+					</div>
+				</div>
 			</div>
 			<div class="col-s-6 middle-nav">
 				<div class="top-nav-middle">
@@ -469,7 +507,7 @@ color: #a9a8a8;
 					</div>
 				</div>
 			</div>
-			<div class="col-s-3">
+			<div class="col-s-3 md-none">
 				<div class="top-nav-right">
 					<div onclick="profileFunction()" class="user">
 						<a >
@@ -489,7 +527,7 @@ color: #a9a8a8;
 <section class="body-section">
 <div class="screen">
 	<div class="col">
-		<div class="col-s-3">
+		<div class="col-s-3 md-none">
 			<menu class="">
 				<div class="">
 					<ul class="side-nave-ul" >
@@ -515,7 +553,7 @@ color: #a9a8a8;
 
 			</menu>
 		</div>
-		<div class="col-s-6">
+		<div class="col-s-6 mp-0">
 		@include('messages.message')
 			<div class="middle-section">
 			<!--
@@ -731,7 +769,7 @@ color: #a9a8a8;
 			
 			</div>
 		</div>
-		<div class="col-s-3">
+		<div class="col-s-3 mp-0 md-none">
 			<div class="side-section-load">
 			  <div class="people">
 				<div class="friend">
@@ -839,6 +877,18 @@ color: #a9a8a8;
 		//----------massage box---------//
 		$('.massage-main-div').show();
 		$('.chat-box').show();
+		
+		//	MEDIA QUERY FOR CHAT BOX
+
+		if (window.matchMedia('(max-width: 576px)').matches) {
+			$('header').hide();
+			$('.massage-div').animate({
+				height:'85vh',
+			});
+		} else {
+			
+		}
+		
 		
 		  $('.massage-title span').html(userName);
 		  $('.massage-title img').attr('src',image);
@@ -1327,20 +1377,13 @@ $(document).ready(function(){
 			},
 		});
 	});
-	
-	
-	
-/* 	function scollbottom(){
-		$('#massage-body').scollTop =$('#massage-body').scrollHight;
-	} */
-	
-	
 		
 });	
 
 
-//		SEARCH/FIND  PERSONE..
 
+
+//		SEARCH/FIND  PERSONE..
 $(document).ready(function(){
 
 	
@@ -1394,6 +1437,8 @@ $(document).ready(function(){
 };
 	
 });
+
+
 
 
 

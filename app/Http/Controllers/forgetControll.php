@@ -19,12 +19,6 @@ class forgetControll extends Controller
         return view('register.forget.forgetEmail');
     }
 
- //		VIEW VERIFY PAGE
-/*     public function verifyPage()
-    {
-        return view('register.forget.forgetVerify');
-    }
- */
 
 
 	
