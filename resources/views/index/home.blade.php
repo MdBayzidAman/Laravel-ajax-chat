@@ -553,7 +553,7 @@ color: #a9a8a8;
 
 			</menu>
 		</div>
-		<div class="col-s-6 mp-0">
+		<div id="main-screen" class="col-s-6 mp-0">
 		@include('messages.message')
 			<div class="middle-section">
 			<!--
@@ -769,12 +769,12 @@ color: #a9a8a8;
 			
 			</div>
 		</div>
-		<div class="col-s-3 mp-0 md-none">
+		<div id="people-section" class="col-s-3 mp-0 md-none">
 			<div class="side-section-load">
 			  <div class="people">
 				<div class="friend">
 					<div class="people-title">
-						<span>Contacts</span>
+						<span>Contact People</span>
 					</div>
 					@foreach(App\friend::where('from_friend',$user->username)->orWhere('to_friend',$user->username)->get() as $friends)	
 					
@@ -878,16 +878,22 @@ color: #a9a8a8;
 		$('.massage-main-div').show();
 		$('.chat-box').show();
 		
+		
+		
+		
 		//	MEDIA QUERY FOR CHAT BOX
-
-		if (window.matchMedia('(max-width: 576px)').matches) {
+		if(window.matchMedia('(max-width: 576px)').matches){
 			$('header').hide();
 			$('.massage-div').animate({
-				height:'85vh',
+				height:'100vh',
 			});
+			$('footer').css("display","none");
 		} else {
 			
 		}
+		
+		
+		
 		
 		
 		  $('.massage-title span').html(userName);
@@ -966,6 +972,19 @@ color: #a9a8a8;
 	
 	
 	$('.backMsg').click(function(e){
+		
+		//	MEDIA QUERY FOR CHAT BOX
+
+		if(window.matchMedia('(max-width: 576px)').matches) {
+			$('header').show();
+			$('.massage-div').animate({
+				height:'500px',
+			});
+			$('footer').css("display","block");
+		} else {
+			
+		}
+
 		
 		$('.people-user-massage').show();
 		$('.massage-main-div').hide();
@@ -1223,7 +1242,17 @@ function intvalChatPerson(){
 		
 		$('.chat-box').hide();
 		ChangeUrl('/{{$user->username}}','/{{$user->username}}');
-
+		
+		
+		if (window.matchMedia('(max-width: 576px)').matches){
+			
+			$('#main-screen').css("display","block");
+			//$('#people-section').css("display","block");
+			$('#people-section').addClass('md-none');
+		} else {
+			
+		}
+		
 		$('.add-contact').html('<p>Add Contacts</p>');
 		
 		   $('.msg-prof').hide();
@@ -1282,7 +1311,15 @@ function intvalChatPerson(){
 		$('.profile-section').hide();
 		$('.edit-prof').hide();
 		$('.chat-box').show();
-		//$('#middle-section-load').html("").load("{{asset('page/massage.blade.php')}}");
+		
+		if (window.matchMedia('(max-width: 576px)').matches){
+			
+			$('#main-screen').css("display","block");
+			//$('#people-section').css("display","block");
+			$('#people-section').addClass('md-none');
+		} else {
+			
+		}
 		
 	};
 

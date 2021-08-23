@@ -1,4 +1,7 @@
 
+
+
+
 /*	mobile-setting side bar		*/
 .close i{
 	float:right;
@@ -9,7 +12,7 @@
 	width: 75%;
     height: 100%;
     box-shadow: -20px 0px 0px 2000px #3e3e3e57;
-	position:absolute;
+	position:fixed;
 	right:0;
 	top: 0;
 	display:none;
@@ -48,8 +51,20 @@ footer{
     justify-content: space-around;
     align-items: center;
 	padding: 15px;
+	text-align:center;
 }
 
+.icons div span{
+	font-size:12px;
+	font-weight:700;
+}
+
+#people-right-icon{
+	margin-left: -13px;
+    background: -webkit-linear-gradient(194deg, #000000, #0d0d0d, #0000008a, #00000000);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: #00000000;
+}
 
 /*	media responsive	*/
 @media only screen and (max-width: 576px)

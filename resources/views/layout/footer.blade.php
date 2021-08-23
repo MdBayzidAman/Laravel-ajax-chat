@@ -23,13 +23,57 @@
 
 <footer class="" >
 	<div class="icons">
-		<i onclick="massgeFunction()" class="ti-comment-alt"></i>
-		<i onclick="profileFunction()" class="ti-user"></i>
-		<i id="setting-icon" class="ti-settings"></i>
+		<div onclick="massgeFunction()" >
+			<i class="ti-comment-alt"></i><br />
+			<span>Chat</span>
+		</div>
+		<div onclick="profileFunction()" >
+			<i class="ti-user"></i>
+			<br />
+			<span>Profile</span>
+		</div>
+		<div onclick="mobilePeopleFunction()" >
+			<i class="ti-user"></i>
+			<i id="people-right-icon" class="ti-user"></i>
+			<br />
+			<span>People</span>
+		</div>
+		<div>
+			<i id="setting-icon" class="ti-settings"></i>
+			<br />
+			<span>setting</span>
+		</div>
 	</div>
 </footer>
 
 <script type="text/javascript">
+
+	//	MOBILE PEOPLE FUNCTION ....
+	
+	function mobilePeopleFunction() {
+		
+		
+		
+		if (window.matchMedia('(max-width: 576px)').matches){
+			
+			$('#main-screen').css("display","none");
+			//$('#people-section').css("display","block");
+			$('#people-section').removeClass('md-none');
+		} else {
+			
+		}
+		
+		
+	};
+
+
+$(document).ready(function(){
+});
+
+	
+	
+	
+	//	MOBILE SETTING ....
 	$('#setting-icon').click(function(){
 		$('.mobile-setting').show();
 	});
