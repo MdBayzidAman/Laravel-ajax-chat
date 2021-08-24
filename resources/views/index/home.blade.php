@@ -462,6 +462,13 @@ color: #a9a8a8;
 	}
 }
 
+@media only screen and (max-width: 768px)
+{
+	footer{
+		display:block;
+	}
+}
+
 
 
 @endsection
@@ -892,6 +899,16 @@ color: #a9a8a8;
 			
 		}
 		
+		if(window.matchMedia('(max-width: 768px)').matches){
+			$('header').hide();
+			$('.massage-div').animate({
+				height:'100vh',
+			});
+			$('footer').css("display","none");
+		} else {
+			
+		}
+		
 		
 		
 		
@@ -976,6 +993,16 @@ color: #a9a8a8;
 		//	MEDIA QUERY FOR CHAT BOX
 
 		if(window.matchMedia('(max-width: 576px)').matches) {
+			$('header').show();
+			$('.massage-div').animate({
+				height:'500px',
+			});
+			$('footer').css("display","block");
+		} else {
+			
+		}
+		
+		if(window.matchMedia('(max-width: 768px)').matches) {
 			$('header').show();
 			$('.massage-div').animate({
 				height:'500px',
@@ -1181,6 +1208,10 @@ function intvalChatPerson(){
 		$('.add-contact').show();
 		$('.chat-box').hide();
 		$('.inbox').hide();
+		
+		
+		
+		
 		ChangeUrl('/'+profileLink,'/'+profileLink);
 
 		$.get('/subUserProfile?username={{$user->username}}&to_username='+profileLink,function(data){
@@ -1247,11 +1278,19 @@ function intvalChatPerson(){
 		if (window.matchMedia('(max-width: 576px)').matches){
 			
 			$('#main-screen').css("display","block");
-			//$('#people-section').css("display","block");
 			$('#people-section').addClass('md-none');
 		} else {
 			
 		}
+
+		if (window.matchMedia('(max-width: 768px)').matches){
+			
+			$('#main-screen').css("display","block");
+			$('#people-section').addClass('md-none');
+		} else {
+			
+		}
+			
 		
 		$('.add-contact').html('<p>Add Contacts</p>');
 		
@@ -1313,6 +1352,15 @@ function intvalChatPerson(){
 		$('.chat-box').show();
 		
 		if (window.matchMedia('(max-width: 576px)').matches){
+			
+			$('#main-screen').css("display","block");
+			//$('#people-section').css("display","block");
+			$('#people-section').addClass('md-none');
+		} else {
+			
+		}
+		
+		if (window.matchMedia('(max-width: 768px)').matches){
 			
 			$('#main-screen').css("display","block");
 			//$('#people-section').css("display","block");

@@ -74,7 +74,24 @@ footer{
 	.mp-0{padding:0 !important;}
 	.body-section{padding-bottom:0px !important;}
 	.people-title{padding:16px 12px !important;}
+	.middle-nav {border: none !important;}
 	
+}
+
+@media only screen and (max-width: 768px)
+{
+	.md-none{display:none !important;}
+	.md-block{display:block !important;}
+	.mp-0{padding:0 !important;}
+	.body-section{padding-bottom:0px !important;}
+	.people-title{padding:16px 12px !important;}
+	.middle-nav {border: none !important;}
+	
+}
+
+@media only screen and (max-width: 1200px)
+{
+	.top-nav-left a{font-size:20px !important;}
 }
 
 

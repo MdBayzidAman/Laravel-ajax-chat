@@ -41,7 +41,7 @@
 		<div>
 			<i id="setting-icon" class="ti-settings"></i>
 			<br />
-			<span>setting</span>
+			<span>Setting</span>
 		</div>
 	</div>
 </footer>
@@ -59,23 +59,28 @@
 			$('#main-screen').css("display","none");
 			//$('#people-section').css("display","block");
 			$('#people-section').removeClass('md-none');
-		} else {
+		} else {}
+		
+		if (window.matchMedia('(max-width: 768px)').matches){
 			
-		}
+			$('#main-screen').css("display","none");
+			//$('#people-section').css("display","block");
+			$('#people-section').removeClass('md-none');
+		} else {}
+		
 		
 		
 	};
 
 
-$(document).ready(function(){
-});
-
-	
 	
 	
 	//	MOBILE SETTING ....
 	$('#setting-icon').click(function(){
-		$('.mobile-setting').show();
+		
+		$('.mobile-setting').animate({
+			width: 'toggle',
+		},300);
 	});
 	$('#setting-close').click(function(){
 		$('.mobile-setting').animate({
