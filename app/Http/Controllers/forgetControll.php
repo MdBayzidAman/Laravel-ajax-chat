@@ -39,19 +39,6 @@ class forgetControll extends Controller
 		
 		$code=rand(111111,999999);
 		
-/* 		Mail::send('register.mail',[
-		
-			'name' => $request->name,
-			'code' => $code,
-		
-		],function($mail) use($request){
-			
-			$mail->from(env('MAIL_FROM_ADDRESS',$request->email));
-			$mail->to("$request->email")->subject('ChatApp');
-		
-		});
-		
- */
  
 		$email=user::where('email',$request->email)->get();
 		$countEmail=count($email);
@@ -62,6 +49,20 @@ class forgetControll extends Controller
 			$user=user::where('email',$request->email)->first();
 			$user->verify=$code;
 			$user->save();
+			
+			
+			Mail::send('register.mail',[
+			
+				'name' => $user->firstName,
+				'code' => $code,
+			
+			],function($mail) use($request){
+				
+				$mail->from(env('MAIL_FROM_ADDRESS',$request->email));
+				$mail->to("$request->email")->subject('ChatApplication Verification Code');
+			
+			});
+			
 			
 			
 			$username=$user->username;
@@ -91,24 +92,26 @@ class forgetControll extends Controller
 		
 		$username=$request->username;
 		$code=rand(111111,999999);
-		
-/* 		Mail::send('register.mail',[
-		
-			'name' => $request->name,
-			'code' => $code,
-		
-		],function($mail) use($request){
-			
-			$mail->from(env('MAIL_FROM_ADDRESS',$request->email));
-			$mail->to("$request->email")->subject('ChatApp');
-		
-		});
-		
- */
+				
+
 		$user=new user;
 		$user=user::where('username',$request->username)->first();
 		$user->verify=$code;
 		$user->save();
+		
+		
+		Mail::send('register.mail',[
+		
+			'name' => $user->firstName,
+			'code' => $code,
+		
+		],function($mail) use($user){
+			
+			$mail->from(env('MAIL_FROM_ADDRESS',$user->email));
+			$mail->to("$user->email")->subject('ChatApplication Verification Code');
+		
+		});
+		
 		
         return view('register.forget.forgetVerify',compact('username'))->with('success','Please check your email inbox !. We send a verify code to your email.');
     }

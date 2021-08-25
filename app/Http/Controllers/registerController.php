@@ -40,19 +40,19 @@ class registerController extends Controller
 			
 		$code=rand(111111,999999);
 		
-/* 		Mail::send('register.mail',[
+		Mail::send('register.mail',[
 		
-			'name' => $request->name,
+			'name' => $request->firstName,
 			'code' => $code,
 		
 		],function($mail) use($request){
 			
 			$mail->from(env('MAIL_FROM_ADDRESS',$request->email));
-			$mail->to("$request->email")->subject('ChatApp');
+			$mail->to("$request->email")->subject('ChatApplication Verification Code');
 		
 		});
 		
- */
+
  		 $username_replace=str_replace(' ', '', $request->firstName.'-'.$request->lastName);
 		 
 		 $count_username=count(user::where('username_short',$username_replace)->get());
@@ -117,6 +117,18 @@ class registerController extends Controller
 		$firstName=user::where('username',$request->username)->first()->firstName;
 		
 		
+		
+		Mail::send('register.congrate',[
+		
+			'name' => $user->firstName,
+		
+		],function($mail) use($user){
+			
+			$mail->from(env('MAIL_FROM_ADDRESS',$user->email));
+			$mail->to("$user->email")->subject('Congratulation 🎊');
+		
+		});
+		
 
 			return redirect('/')->with('success','Hi '.$firstName.' !  You are successfully created your account.');
 		
@@ -139,19 +151,19 @@ class registerController extends Controller
 		
 		$user_mail=user::where('username',$request->username)->first()->email;
 		
-/* 		Mail::send('register.mail',[
+		Mail::send('register.mail',[
 		
-			'name' => user::where('username',$request->username)->first()->firstName,
+			'name' => $request->firstName,
 			'code' => $code,
 		
 		],function($mail) use($request){
 			
 			$mail->from(env('MAIL_FROM_ADDRESS',$request->email));
-			$mail->to("$user_mail")->subject('ChatApp');
+			$mail->to("$request->email")->subject('ChatApplication Verification Code');
 		
 		});
 		
- */
+
 		 $user=new user;
 		 $user=user::where('username',$request->username)->first();
 		 $user->verify=$code;

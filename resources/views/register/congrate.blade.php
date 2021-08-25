@@ -10,7 +10,7 @@
 		*{
 			padding:0;
 			margin:0;
-			color: #585858;
+			color: #2b2b2b;
 			font-family: system-ui;
 		}
 		.main-section{
@@ -47,6 +47,7 @@
 			color:#333;
 			font-size:20px;
 		}
+		h1 span{color:#333;}
 		.powerBy{
 			font-size:13px;
 		}
@@ -64,11 +65,12 @@
 	<br />
 	<div class="details">
 		<h4>Dear {{$name}},</h4>
-		<p>We received a request to access your ChatApplication Account. Your Google verification code is:</p><br />
-		<h1>{{$code}}</h1><br />
-		<p>
-		<b>Do not forward or give this code to anyone.</b>
-		</p>
+		<br />
+		<h1><span>Congratulation</span>🎊</h1><br />
+		<p>You are successfully created your account 💖</p>
+		
+		<p>Thank you for joing to ChatApplication. We have received your info. Spend your beautiful moments with ChatApplication 💕</p>
+		
 		<br />
 		<p class="powerBy" ><b><a href="">- ChatApplication</a></b> By <b> <a href="">Md Bayzid Aman</a></b></p>
 	</div>

@@ -1,55 +1,188 @@
-			//***************************************************//
-			//        ACTIVE  10 Button---> .btn! for active		 //
-			//***************************************************//
 
+// ------ chat box ---------//
+$('.massages-people').live('click',function(e){
+	 clearInterval(window.interval);
+
+	var image = $(this).find('.msg-people .user-img').attr("src");
+	var userInfo = $(this).find('.userInfo').val();
+	var userName = $(this).find('.msg-people-name').html();
+	massgeFunction();
+	$('.people-user-massage').hide();
+	$('.profile-section').hide();
+	//----------massage box---------//
+	$('.massage-main-div').show();
+	$('.chat-box').show();
+	
+	
+	
+	
+	//	MEDIA QUERY FOR CHAT BOX
+	if(window.matchMedia('(max-width: 576px)').matches){
+		$('header').hide();
+		$('.massage-div').animate({
+			height:'100vh',
+		});
+		$('footer').css("display","none");
+	} else {
+		
+	}
+	
+	if(window.matchMedia('(max-width: 768px)').matches){
+		$('header').hide();
+		$('.massage-div').animate({
+			height:'100vh',
+		});
+		$('footer').css("display","none");
+	} else {
+		
+	}
+	
+	
+	
+	
+	
+	  $('.massage-title span').html(userName);
+	  $('.massage-title img').attr('src',image);
+	  
+	  
+	  $('#to_user').val(userInfo);
+	  $('#msg_username').val(userInfo);
+	 // console.log($(window).width());
+	  
+	  $('.massage-body').empty();
+	  
+	 
+	  intervalmsg()
+	  window.interval = setInterval(intervalmsg,2000);
+	  function intervalmsg(){
+	$.ajax({
+		type:'get',
+		url:'/chat-massage?username={{$user->username}}&to_username='+userInfo,
+		success:function(data){
+			//console.log(data);
+			$('.massage-body').empty()
+			$.each(data,function(index, chat){
 				
-$(".btn1").click(function(){
-	$(".btn1").addClass("active");
-	$(".btn2,.btn3,.btn4,.btn5,.btn6,.btn7,.btn8,.btn9,btn10").removeClass("active");
+				
+				if(chat.from_user=='{{$user->username}}'){
+					
+					if(chat.massage==null){
+					}else{
+						$('.massage-body').append('<div class="from-msg"><p>'+chat.massage+'</p></div>');
+					}
+					
+					if(chat.image==null){
+					}else{
+						$('.massage-body').append('<div class="from-msg"><img src="/image/user/'+chat.image+'" alt="" /></div>');
+					}
+					
+				}else{
+					
+					if(chat.massage==null){
+					}else{
+						$('.massage-body').append('<div class="to-msg"><p>'+chat.massage+'</p></div>');
+					}
+					
+					if(chat.image==null){
+					}else{
+						$('.massage-body').append('<div class="to-msg"><img src="/image/user/'+chat.image+'" alt="" /></div>');
+					}
+					
+					
+				}
+			
+			
+
+			});
+
+		},
+		error:function(data){
+			//console.log(data);
+		},
+	});	
+	};	
+		
+$('.massage-body').animate({scrollTop:200000000000000});
+
+	
+	$('.backMsg,').click(function(){
+		clearInterval(window.interval);
+		
+
+	});
+
+
 });
 
-$(".btn2").click(function(){
-	$(".btn2").addClass("active");
-	$(".btn1,.btn3,.btn4,.btn5,.btn6,.btn7,.btn8,.btn9,btn10").removeClass("active");
+
+
+$('.backMsg').click(function(e){
+	
+	//	MEDIA QUERY FOR CHAT BOX
+
+	if(window.matchMedia('(max-width: 576px)').matches) {
+		$('header').show();
+		$('.massage-div').animate({
+			height:'500px',
+		});
+		$('footer').css("display","block");
+	} else {
+		
+	}
+	
+	if(window.matchMedia('(max-width: 768px)').matches) {
+		$('header').show();
+		$('.massage-div').animate({
+			height:'500px',
+		});
+		$('footer').css("display","block");
+	} else {
+		
+	}
+
+	
+	$('.people-user-massage').show();
+	$('.massage-main-div').hide();
 });
 
-$(".btn3").click(function(){
-	$(".btn3").addClass("active");
-	$(".btn1,.btn2,.btn4,.btn5,.btn6,.btn7,.btn8,.btn9,btn10").removeClass("active");
+
+$('.profileBack, .inbox').click(function(e){
+	
+	massgeFunction();
+	
 });
 
-$(".btn4").click(function(){
-	$(".btn4").addClass("active");
-	$(".btn1,.btn2,.btn3,.btn5,.btn6,.btn7,.btn8,.btn9,btn10").removeClass("active");
-});
 
-$(".btn5").click(function(){
-	$(".btn5").addClass("active");
-	$(".btn1,.btn2,.btn3,.btn4,.btn6,.btn7,.btn8,.btn9,btn10").removeClass("active");
-});
 
-$(".btn6").click(function(){
-	$(".btn6").addClass("active");
-	$(".btn1,.btn2,.btn3,.btn4,.btn5,.btn7,.btn8,.btn9,btn10").removeClass("active");
-});
+//-------------------chat box end------------------//
 
-$(".btn7").click(function(){
-	$(".btn7").addClass("active");
-	$(".btn1,.btn2,.btn3,.btn4,.btn5,.btn6,.btn8,.btn9,btn10").removeClass("active");
-});
+//------------- chat person------------------//
 
-$(".btn8").click(function(){
-	$(".btn8").addClass("active");
-	$(".btn1,.btn2,.btn3,.btn4,.btn5,.btn6,.btn7,.btn9,btn10").removeClass("active");
-});
+var intvalChat= setInterval(intvalChatPerson,4000)
+function intvalChatPerson(){
+	$.ajax({
+		type:'get',
+		url:'/chat-people?username={{$user->username}}',
+		success:function(data){
+			//console.log(data);
+			$('.people-user-massage').empty()
 
-$(".btn9").click(function(){
-	$(".btn2").addClass("active");
-	$(".btn1,.btn2,.btn3,.btn4,.btn5,.btn6,.btn7,.btn8,btn10").removeClass("active");
-});
+			$('.people-user-massage').append(data);
 
-$(".btn10").click(function(){
-	$(".btn10").addClass("active");
-	$(".btn1,.btn2,.btn3,.btn4,.btn5,.btn6,.btn7,.btn8,btn9").removeClass("active");
-});
+			$.each(data,function(index, chat){
+				
+							
+			});
+
+		},
+		error:function(data){
+			//console.log(data);
+		},
+	});	
+	};	
+//------------- end chat person------------------//
+
+
+
+
 
