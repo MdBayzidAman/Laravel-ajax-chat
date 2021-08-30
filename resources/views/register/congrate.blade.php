@@ -32,7 +32,12 @@
 			border-radius: 50%;
 			margin-right:8px;
 		}
-		.logo-section{margin-bottom: 10px; text-align:center;}
+		.logo-section{
+			margin-bottom:10px;
+			text-align:center;
+			width: 250px;
+			margin: auto;
+		}
 		.logo-section a{
 			height: 40px;
 			display: flex;
